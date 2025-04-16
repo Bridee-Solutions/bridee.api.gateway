@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: .
+    container_name: bridee-nginx
+    ports:
+      - "80:80"
+    networks:
+      - bridee-network
+
+  api:
+    image: bridee-api
+    networks:
+      - bridee-network
+    ports:
+      - "8080:8080"
+
+  
+  auth:
+    image: bridee-auth
+    networks:
+      - bridee-network
+    ports:
+      - "7070:7070"
+
+  evento:
+    image: bridee-evento
+    networks:
+      - bridee-network
+    ports:
+      - "8080:8080"
+
+  convidados:
+    image: bridee-convidados
+    networks:
+      - bridee-network
+    ports:
+      - "8080:8080"
+
+networks:
+  bridee-network:
+    driver: bridge
